@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { marked } from 'marked';
 
 export default function PostList() {
   const [posts, setPosts] = useState([]);
@@ -7,7 +8,7 @@ export default function PostList() {
     fetch('/content/posts/welcome.md')
       .then((res) => res.text())
       .then((text) => {
-        setPosts([{ title: 'Welcome to The Fulcrum', content: text }]);
+        setPosts([{ title: 'Welcome to The Fulcrum', content: marked(text) }]);
       });
   }, []);
 
@@ -16,7 +17,7 @@ export default function PostList() {
       {posts.map((post, idx) => (
         <article key={idx} style={{ marginBottom: '2rem' }}>
           <h2>{post.title}</h2>
-          <pre>{post.content}</pre>
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
       ))}
     </div>
