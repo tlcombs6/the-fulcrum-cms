@@ -1,5 +1,5 @@
 ---
-title: "Welcome to The Fulcrum"
+title: "What Is This Site?"
 date: 2025-05-08
 ---
 
