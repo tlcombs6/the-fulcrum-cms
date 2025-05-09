@@ -1,9 +1,9 @@
 export default function Home() {
   return (
     <section>
-      <h2>Welcome</h2>
+      <h2>What that Means?</h2>
       <p>
-        Welcome to <strong>The Fulcrum</strong> — a mechanical distillery where we analyze pressures within existing systems to reveal what holds, what fails, and what truly matters.
+        What is a <strong>mechanical distillery?</strong>? — Here at <strong>The Fulcrum</strong> we analyze pressures within existing systems in hopes of revealing what holds, what fails, and what truly matters.
       </p>
     </section>
   );
