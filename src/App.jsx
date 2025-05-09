@@ -1,20 +1,32 @@
 import React from 'react';
-import PostList from './components/PostList';
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import Post from './pages/Post';
 
-function App() {
+export default function App() {
   return (
     <main style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem' }}>
-      <header style={{ marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
-          The Fulcrum
+      <header style={{ marginBottom: '2rem' }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '0.25rem' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            The Fulcrum
+          </Link>
         </h1>
-        <p style={{ fontStyle: 'italic', fontSize: '1.2rem', color: '#555' }}>
+        <p style={{ fontStyle: 'italic', fontSize: '1.1rem', color: '#888' }}>
           Mechanical distillery.
         </p>
+        <nav style={{ marginTop: '1rem' }}>
+          <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
+          <Link to="/blog">Blog</Link>
+        </nav>
       </header>
-      <PostList />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/post/:slug" element={<Post />} />
+      </Routes>
     </main>
   );
 }
-
-export default App;
