@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+import Editor from './pages/Editor';
 
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -20,6 +21,7 @@ export default function App() {
         <nav style={{ marginTop: '1rem' }}>
           <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
           <Link to="/blog">Blog</Link>
+          <Link to="/editor" style={{ marginLeft: '1rem' }}>New Post</Link>
         </nav>
       </header>
 
@@ -27,7 +29,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/post/:slug" element={<Post />} />
+        <Route path="/editor" element={<Editor />} />
       </Routes>
     </main>
   );
-}
