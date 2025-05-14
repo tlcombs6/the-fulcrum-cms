@@ -9,6 +9,7 @@ export default function Home() {
       .from('posts')
       .select('*')
       .then(({ data, error }) => {
+        console.log('Supabase response:', { data, error }) // ✅ Debug log
         if (error) console.error('Fetch error:', error)
         else setPosts(data)
       })
