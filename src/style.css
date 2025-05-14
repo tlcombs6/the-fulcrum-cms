@@ -1,53 +1,99 @@
 :root {
-    --bg: #111;
-    --text: #eee;
-    --accent: #888;
-    --card-bg: #1c1c1c;
-    --card-border: #2a2a2a;
-  }
-  
-  body {
-    font-family: system-ui, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 2rem;
-    background-color: var(--bg);
-    color: var(--text);
-  }
-  
-  main {
-    max-width: 768px;
-    margin: auto;
-  }
-  
-  header {
-    margin-bottom: 3rem;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--text);
-  }
-  
-  p {
-    color: var(--accent);
-  }
-  
-  article {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 2rem;
-  }
-  
-  a {
-    color: #67c2ff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }  
+  --bg: #111;
+  --text: #eee;
+  --accent: #888;
+  --card-bg: #1c1c1c;
+  --card-border: #2a2a2a;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 2rem;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+main {
+  max-width: 768px;
+  margin: auto;
+}
+
+header {
+  margin-bottom: 3rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+p {
+  color: var(--accent);
+}
+
+article {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+a {
+  color: #67c2ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* POST CONTENT STYLING */
+.post-body {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.post-body p {
+  margin: 1rem 0;
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3 {
+  margin: 1.5rem 0 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.post-body ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.post-body li {
+  margin-bottom: 0.5rem;
+}
+
+.post-body code {
+  background-color: #222;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #ffc66d;
+}
+
+.post-body pre {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: monospace;
+  color: #fff;
+  margin: 1.5rem 0;
+}

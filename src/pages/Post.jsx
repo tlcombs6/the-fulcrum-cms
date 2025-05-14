@@ -24,9 +24,12 @@ export default function Post() {
   if (!post) return <p>Loading...</p>
 
   return (
-    <article>
-      <h2>{post.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: post.body }} />
+    <article style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem' }}>
+      <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{post.title}</h2>
+      <div
+        className="post-body"
+        dangerouslySetInnerHTML={{ __html: post.body }}
+      />
     </article>
   )
 }

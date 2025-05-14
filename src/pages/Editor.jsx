@@ -3,16 +3,26 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { supabase } from '../lib/supabase'
 
+// Slugify helper
+const slugify = (str) =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '')
+
 export default function Editor() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [status, setStatus] = useState(null)
 
   const handleSave = async () => {
+    const slug = slugify(title)
+
     const { error } = await supabase.from('posts').insert([
       {
         title,
-        body: content, // assuming your column is called `body`
+        slug,
+        body: content,
       },
     ])
 
@@ -28,7 +38,7 @@ export default function Editor() {
 
   return (
     <div style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem' }}>
-      <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Write a Post</h2>
+      <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Write a Post</h2>
 
       <input
         type="text"
@@ -37,27 +47,33 @@ export default function Editor() {
         onChange={(e) => setTitle(e.target.value)}
         style={{
           width: '100%',
-          padding: '0.5rem',
+          padding: '0.75rem',
           fontSize: '1.2rem',
           marginBottom: '1rem',
-          borderRadius: '4px',
-          border: '1px solid #ccc',
+          borderRadius: '6px',
+          border: '1px solid #444',
+          backgroundColor: '#1c1c1c',
+          color: '#eee',
         }}
       />
 
       <ReactQuill
         value={content}
         onChange={setContent}
-        style={{ height: '300px', marginBottom: '1rem' }}
+        style={{
+          height: '300px',
+          marginBottom: '1rem',
+          backgroundColor: '#fff',
+        }}
       />
 
       <button
         onClick={handleSave}
         style={{
-          padding: '0.75rem 1.25rem',
+          padding: '0.75rem 1.5rem',
           fontSize: '1rem',
           backgroundColor: '#646cff',
-          color: 'white',
+          color: '#fff',
           border: 'none',
           borderRadius: '6px',
           cursor: 'pointer',
