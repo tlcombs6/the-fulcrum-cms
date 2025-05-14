@@ -5,6 +5,7 @@ import Editor from './pages/Editor';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Post from './pages/Post';
+import TestPosts from './pages/TestPosts';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/editor" style={{ marginLeft: '1rem' }}>New Post</Link>
+          <Link to="/test" style={{ marginLeft: '1rem' }}>Test DB</Link>
         </nav>
       </header>
 
@@ -30,6 +32,7 @@ export default function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/post/:slug" element={<Post />} />
         <Route path="/editor" element={<Editor />} />
+        <Route path="/test" element={<TestPosts />} />
       </Routes>
     </main>
   );
