@@ -18,14 +18,28 @@ export default function Blog() {
 
   return (
     <section>
-      <h2>Blog</h2>
+      <h2 style={{ marginBottom: '2rem' }}>Blog</h2>
+
       {posts.length === 0 && <p>No posts found.</p>}
+
       {posts.map((post) => (
-        <article key={post.id} style={{ marginBottom: '2rem' }}>
-          <h3>
-            <Link to={`/post/${post.slug || post.id}`}>{post.title}</Link>
+        <article
+          key={post.id}
+          style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            padding: '1.5rem',
+            borderRadius: '8px',
+            marginBottom: '2rem',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          <h3 style={{ marginBottom: '0.5rem' }}>
+            <Link to={`/post/${post.slug || post.id}`} style={{ color: '#67c2ff' }}>
+              {post.title}
+            </Link>
           </h3>
-          <p>{post.body}</p>
+          <div className="post-body" dangerouslySetInnerHTML={{ __html: post.body }} />
         </article>
       ))}
     </section>
