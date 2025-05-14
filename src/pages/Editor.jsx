@@ -76,11 +76,13 @@ export default function Editor() {
           width: '100%',
           padding: '0.75rem',
           fontSize: '1rem',
+          fontWeight: 'bold',
           backgroundColor: '#646cff',
           color: '#fff',
           border: 'none',
           borderRadius: '6px',
           cursor: 'pointer',
+          textAlign: 'center',
         }}
       >
         Save
