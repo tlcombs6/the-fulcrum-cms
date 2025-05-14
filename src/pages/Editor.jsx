@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React, { useState } from 'react'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+import { supabase } from '../lib/supabase'
 
 export default function Editor() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [status, setStatus] = useState(null)
 
-  const handleSave = () => {
-    const post = {
-      title,
-      content,
-      createdAt: new Date().toISOString(),
-    };
+  const handleSave = async () => {
+    const { error } = await supabase.from('posts').insert([
+      {
+        title,
+        body: content, // assuming your column is called `body`
+      },
+    ])
 
-    console.log('Post saved:', post);
-    // Placeholder: replace with save-to-file or CMS logic later
-  };
+    if (error) {
+      console.error('Failed to save post:', error)
+      setStatus('error')
+    } else {
+      setTitle('')
+      setContent('')
+      setStatus('success')
+    }
+  }
 
   return (
     <div style={{ maxWidth: '768px', margin: '0 auto', padding: '2rem' }}>
       <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Write a Post</h2>
-      
+
       <input
         type="text"
         placeholder="Post title"
@@ -35,13 +44,13 @@ export default function Editor() {
           border: '1px solid #ccc',
         }}
       />
-      
+
       <ReactQuill
         value={content}
         onChange={setContent}
         style={{ height: '300px', marginBottom: '1rem' }}
       />
-      
+
       <button
         onClick={handleSave}
         style={{
@@ -56,6 +65,9 @@ export default function Editor() {
       >
         Save
       </button>
+
+      {status === 'success' && <p style={{ color: 'green' }}>Post saved!</p>}
+      {status === 'error' && <p style={{ color: 'red' }}>Error saving post.</p>}
     </div>
-  );
+  )
 }

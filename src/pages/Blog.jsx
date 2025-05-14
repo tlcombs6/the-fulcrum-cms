@@ -1,43 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import matter from 'gray-matter';
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 
 export default function Blog() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    // Manually define which files to load
-    const files = ['welcome.md', 'example.md']; // Add more as you go
-
-    Promise.all(
-      files.map((filename) =>
-        fetch(`/content/posts/${filename}`)
-          .then((res) => res.text())
-          .then((text) => {
-            const { data } = matter(text);
-            return {
-              title: data.title,
-              date: data.date,
-              summary: data.summary,
-              slug: filename.replace('.md', ''),
-            };
-          })
-      )
-    ).then(setPosts);
-  }, []);
+    supabase
+      .from('posts')
+      .select('*')
+      .then(({ data, error }) => {
+        console.log('Supabase response (blog):', { data, error })
+        if (error) console.error('Fetch error:', error)
+        else setPosts(data)
+      })
+  }, [])
 
   return (
     <section>
       <h2>Blog</h2>
+      {posts.length === 0 && <p>No posts found.</p>}
       {posts.map((post) => (
-        <article key={post.slug} style={{ marginBottom: '2rem' }}>
+        <article key={post.id} style={{ marginBottom: '2rem' }}>
           <h3>
-            <Link to={`/post/${post.slug}`}>{post.title}</Link>
+            <Link to={`/post/${post.slug || post.id}`}>{post.title}</Link>
           </h3>
-          <p style={{ color: '#aaa', fontSize: '0.9rem' }}>{post.date}</p>
-          <p>{post.summary}</p>
+          <p>{post.body}</p>
         </article>
       ))}
     </section>
-  );
+  )
 }

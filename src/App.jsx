@@ -33,6 +33,7 @@ export default function App() {
         <Route path="/post/:slug" element={<Post />} />
         <Route path="/editor" element={<Editor />} />
         <Route path="/test" element={<TestPosts />} />
+        <Route path="/post/:slug" element={<Post />} />
       </Routes>
     </main>
   );

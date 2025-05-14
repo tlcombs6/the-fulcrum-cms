@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { marked } from 'marked';
-import matter from 'gray-matter';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 
 export default function Post() {
-  const { slug } = useParams();
-  const [post, setPost] = useState(null);
+  const { slug } = useParams()
+  const [post, setPost] = useState(null)
 
   useEffect(() => {
-    fetch(`/content/posts/${slug}.md`)
-      .then((res) => res.text())
-      .then((text) => {
-        const { data, content } = matter(text);
-        setPost({
-          title: data.title,
-          date: data.date,
-          content: marked(content),
-        });
-      });
-  }, [slug]);
+    supabase
+      .from('posts')
+      .select('*')
+      .eq('slug', slug)
+      .single()
+      .then(({ data, error }) => {
+        if (error) {
+          console.error('Post fetch error:', error)
+        } else {
+          setPost(data)
+        }
+      })
+  }, [slug])
 
-  if (!post) return <p>Loading...</p>;
+  if (!post) return <p>Loading...</p>
 
   return (
     <article>
       <h2>{post.title}</h2>
-      <p style={{ color: '#aaa', fontSize: '0.9rem' }}>{post.date}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div dangerouslySetInnerHTML={{ __html: post.body }} />
     </article>
-  );
+  )
 }
