@@ -50,13 +50,13 @@ export default function Editor() {
         onChange={(e) => setTitle(e.target.value)}
         style={{
           width: '100%',
+          marginBottom: '1rem',
           padding: '0.75rem',
           fontSize: '1.2rem',
-          marginBottom: '1rem',
           borderRadius: '6px',
-          border: '1px solid #444',
           backgroundColor: '#1c1c1c',
           color: '#eee',
+          border: '1px solid #444',
         }}
       />
 
@@ -64,27 +64,12 @@ export default function Editor() {
         value={content}
         onChange={setContent}
         style={{
-          height: '300px',
           marginBottom: '1rem',
           borderRadius: '6px',
         }}
       />
 
-      <button
-        onClick={handleSave}
-        style={{
-          width: '100%',
-          padding: '0.75rem',
-          fontSize: '1rem',
-          fontWeight: 'bold',
-          backgroundColor: '#646cff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          textAlign: 'center',
-        }}
-      >
+      <button onClick={handleSave} style={{ width: '100%', marginTop: '1rem' }}>
         Save
       </button>
 
