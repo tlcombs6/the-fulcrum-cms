@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { supabase } from '../lib/supabase'
+import { useNavigate } from 'react-router-dom'
 
 // Slugify helper
 const slugify = (str) =>
@@ -14,6 +15,7 @@ export default function Editor() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [status, setStatus] = useState(null)
+  const navigate = useNavigate()
 
   const handleSave = async () => {
     const slug = slugify(title)
@@ -33,6 +35,7 @@ export default function Editor() {
       setTitle('')
       setContent('')
       setStatus('success')
+      setTimeout(() => navigate('/blog'), 1000)
     }
   }
 
@@ -63,14 +66,15 @@ export default function Editor() {
         style={{
           height: '300px',
           marginBottom: '1rem',
-          backgroundColor: '#fff',
+          borderRadius: '6px',
         }}
       />
 
       <button
         onClick={handleSave}
         style={{
-          padding: '0.75rem 1.5rem',
+          width: '100%',
+          padding: '0.75rem',
           fontSize: '1rem',
           backgroundColor: '#646cff',
           color: '#fff',

@@ -19,16 +19,23 @@ export default function Home() {
     <section>
       <h2>What that Means?</h2>
       <p>
-        What is a <strong>mechanical distillery</strong>? — Here at <strong>The Fulcrum</strong> we analyze pressures within existing systems in hopes of revealing what holds, what fails, and what truly matters.
+        What is a <strong>mechanical distillery</strong>? — Here at{' '}
+        <strong>The Fulcrum</strong> we analyze pressures within existing systems in hopes of revealing what holds, what fails, and what truly matters.
       </p>
 
-      <h3>Live Posts</h3>
+      <h3 style={{ marginTop: '2rem' }}>Live Posts</h3>
       {posts.length === 0 && <p>No posts found.</p>}
+
       {posts.map(post => (
-        <div key={post.id} style={{ marginBottom: '1rem' }}>
-          <strong>{post.title}</strong>
-          <p>{post.body}</p>
-        </div>
+        <article key={post.id} style={{ marginBottom: '2rem' }}>
+          <strong style={{ display: 'block', fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+            {post.title}
+          </strong>
+          <div
+            className="post-body"
+            dangerouslySetInnerHTML={{ __html: post.body }}
+          />
+        </article>
       ))}
     </section>
   )
